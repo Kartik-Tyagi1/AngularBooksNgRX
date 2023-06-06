@@ -1,17 +1,20 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { BooksRoutingModule } from './books-routing.module';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { BooksHomeComponent } from './books-home/books-home.component';
-
+import { BooksRoutingModule } from './books-routing.module';
+import { BooksEffects } from './store/books.effects';
+import { bookReducer } from './store/books.reducer';
 
 @NgModule({
-  declarations: [
-    BooksHomeComponent
-  ],
+  declarations: [BooksHomeComponent],
   imports: [
     CommonModule,
-    BooksRoutingModule
-  ]
+    BooksRoutingModule,
+    StoreModule.forFeature('mybooks', bookReducer),
+    EffectsModule.forFeature([BooksEffects]),
+  ],
 })
-export class BooksModule { }
+export class BooksModule {}

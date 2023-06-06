@@ -4,7 +4,7 @@
       "id": 1,
       "title": "book1",
       "author": "book1author",
-      "cost": "20"
+      "cost": 20
     }
   ]
 }
