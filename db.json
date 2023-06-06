@@ -1,0 +1,10 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "book1",
+      "author": "book1author",
+      "cost": "20"
+    }
+  ]
+}
