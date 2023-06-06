@@ -13,4 +13,8 @@ export class BooksService {
   get() {
     return this.http.get<Book[]>(this.apiURl);
   }
+
+  create(newBook: Book) {
+    return this.http.post<Book>(this.apiURl, newBook);
+  }
 }

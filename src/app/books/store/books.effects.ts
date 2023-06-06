@@ -2,7 +2,12 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap } from 'rxjs';
 import { BooksService } from '../books.service';
-import { booksFetchAPISuccess, invokeBooksAPI } from './books.actions';
+import {
+  booksFetchAPISuccess,
+  invokeBooksAPI,
+  invokeSaveBookAPI,
+  saveBookAPISuccess,
+} from './books.actions';
 
 @Injectable()
 export class BooksEffects {
@@ -15,6 +20,17 @@ export class BooksEffects {
         return this.bookService
           .get()
           .pipe(map((data) => booksFetchAPISuccess({ allBooks: data })));
+      })
+    )
+  );
+
+  saveNewBook$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(invokeSaveBookAPI),
+      switchMap((payload) => {
+        return this.bookService
+          .create(payload.newBook)
+          .pipe(map((data) => saveBookAPISuccess({ response: data })));
       })
     )
   );
