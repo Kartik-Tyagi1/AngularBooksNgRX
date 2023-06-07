@@ -19,3 +19,13 @@ export const saveBookAPISuccess = createAction(
   '[Books API] Save Book API Success',
   props<{ response: Book }>()
 );
+
+export const invokeUpdateBookAPI = createAction(
+  '[Books API] Invoke update Book API',
+  props<{ updatedBook: Book }>()
+);
+
+export const updateBookAPISuccess = createAction(
+  '[Books API] Update Book API Success',
+  props<{ response: Book }>()
+);

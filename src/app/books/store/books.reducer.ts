@@ -1,6 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
 import { Book } from './book';
-import { booksFetchAPISuccess, saveBookAPISuccess } from './books.actions';
+import {
+  booksFetchAPISuccess,
+  saveBookAPISuccess,
+  updateBookAPISuccess,
+} from './books.actions';
 
 export const initialState: ReadonlyArray<Book> = [];
 
@@ -12,6 +16,11 @@ export const bookReducer = createReducer(
   on(saveBookAPISuccess, (state, { response }) => {
     let newState = [...state];
     newState.unshift(response);
+    return newState;
+  }),
+  on(updateBookAPISuccess, (state, { response }) => {
+    let newState = state.filter((_) => _.id !== response.id); // remove old book
+    newState.unshift(response); // add updated book
     return newState;
   })
 );
