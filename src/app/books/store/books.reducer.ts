@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { Book } from './book';
 import {
   booksFetchAPISuccess,
+  deleteBookAPISuccess,
   saveBookAPISuccess,
   updateBookAPISuccess,
 } from './books.actions';
@@ -21,6 +22,10 @@ export const bookReducer = createReducer(
   on(updateBookAPISuccess, (state, { response }) => {
     let newState = state.filter((_) => _.id !== response.id); // remove old book
     newState.unshift(response); // add updated book
+    return newState;
+  }),
+  on(deleteBookAPISuccess, (state, { response }) => {
+    let newState = state.filter((_) => _.id !== response); // remove old book
     return newState;
   })
 );

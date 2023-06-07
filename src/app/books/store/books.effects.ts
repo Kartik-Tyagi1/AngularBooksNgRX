@@ -7,7 +7,9 @@ import { Appstate } from 'src/app/shared/store/appstate';
 import { BooksService } from '../books.service';
 import {
   booksFetchAPISuccess,
+  deleteBookAPISuccess,
   invokeBooksAPI,
+  invokeDeleteBookAPI,
   invokeSaveBookAPI,
   invokeUpdateBookAPI,
   saveBookAPISuccess,
@@ -75,6 +77,27 @@ export class BooksEffects {
               })
             );
             return updateBookAPISuccess({ response: data });
+          })
+        );
+      })
+    )
+  );
+
+  deleteBook$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(invokeDeleteBookAPI),
+      switchMap((payload) => {
+        this.appStore.dispatch(
+          setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '' } })
+        );
+        return this.bookService.delete(payload.id).pipe(
+          map((data) => {
+            this.appStore.dispatch(
+              setAPIStatus({
+                apiStatus: { apiResponseMessage: '', apiStatus: 'success' },
+              })
+            );
+            return deleteBookAPISuccess({ response: payload.id });
           })
         );
       })

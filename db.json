@@ -23,12 +23,6 @@
       "title": "book5",
       "author": "book5author",
       "cost": 50
-    },
-    {
-      "id": 5,
-      "title": "book6",
-      "author": "book6author",
-      "cost": 60
     }
   ]
 }
